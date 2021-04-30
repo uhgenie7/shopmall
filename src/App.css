@@ -2,6 +2,15 @@
   text-align: center;
 }
 
+.background {
+  background: url(./background.png) center top;
+  color: white;
+}
+
+/* .background {
+  background-image: url(/background.jpg);
+} */
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
