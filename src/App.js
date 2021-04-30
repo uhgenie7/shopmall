@@ -31,28 +31,42 @@ function App() {
         </Navbar.Collapse>
       </Navbar>
 
-      <Jumbotron className="background">
-        <h1>MIITOPIA</h1>
-        <p>미토피아 체험판 배포 중!</p>
-        <p>
-          <Button variant="primary">자세히 알아보기</Button>
-        </p>
-      </Jumbotron>
-
-      <Route path="/">
-        <div>메인페이지</div>
+      <Route exact path="/">
+        <Jumbotron className="background">
+          <h1>MIITOPIA</h1>
+          <p>미토피아 체험판 배포 중!</p>
+          <p>
+            <Button variant="primary">자세히 알아보기</Button>
+          </p>
+        </Jumbotron>
+        <div className="container">
+          <div className="row">
+            {shoes.map((item, index) => {
+              return <ShoesList shoes={shoes[index]} i={index} key={index} />;
+            })}
+          </div>
+        </div>
       </Route>
       <Route path="/detail">
-        <div>디테일 페이지입니다</div>
-      </Route>
-
-      <div className="container">
-        <div className="row">
-          {shoes.map((item, index) => {
-            return <ShoesList shoes={shoes[index]} i={index} key={index} />;
-          })}
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6">
+              <img
+                src="https://codingapple1.github.io/shop/shoes1.jpg"
+                width="100%"
+              />
+            </div>
+            <div className="col-md-6 mt-4">
+              <h4 className="pt-5">상품명</h4>
+              <p>상품설명</p>
+              <p>120000원</p>
+              <button className="btn btn-danger">주문하기</button>
+            </div>
+          </div>
         </div>
-      </div>
+      </Route>
+      {/* 이런 방식으로도 쓸 수 있다 */}
+      {/* <Route path="/hello" component={ Modal}></Route> */}
     </div>
   );
 }
