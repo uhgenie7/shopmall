@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import { Navbar, Nav, NavDropdown, Jumbotron, Button } from "react-bootstrap";
 import Data from "./data.js";
+import { Link, Route, Switch } from "react-router-dom";
 
 function App() {
   let [shoes, shoesChange] = useState(Data);
@@ -37,6 +38,14 @@ function App() {
           <Button variant="primary">자세히 알아보기</Button>
         </p>
       </Jumbotron>
+
+      <Route path="/">
+        <div>메인페이지</div>
+      </Route>
+      <Route path="/detail">
+        <div>디테일 페이지입니다</div>
+      </Route>
+
       <div className="container">
         <div className="row">
           {shoes.map((item, index) => {
