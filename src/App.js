@@ -52,11 +52,9 @@ function App() {
             </div>
           </div>
         </Route>
-        <Route path="/detail">
-          <Detail />
+        <Route path="/detail/:id">
+          <Detail shoes={shoes} />
         </Route>
-        {/* 이런 방식으로도 쓸 수 있다 */}
-        {/* <Route path="/hello" component={ Modal}></Route> */}
         <Route path="/:id">
           <div>여긴 어떻게 오셨나요?</div>
         </Route>

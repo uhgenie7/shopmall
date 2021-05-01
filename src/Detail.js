@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
-function Detail() {
+function Detail(props) {
   let history = useHistory();
+  let { id } = useParams(); // {사용자가 입력한 URL }
+  let shoesInfo = props.shoes.find(function (item) {
+    return item.id == id;
+  });
+
   return (
     <div className="container">
       <div className="row">
@@ -13,9 +18,9 @@ function Detail() {
           />
         </div>
         <div className="col-md-6 mt-4">
-          <h4 className="pt-5">상품명</h4>
-          <p>상품설명</p>
-          <p>120000원</p>
+          <h4 className="pt-5">{shoesInfo.title}</h4>
+          <p>{shoesInfo.content}</p>
+          <p>{shoesInfo.price}원</p>
           <button className="btn btn-danger">주문하기</button>
           <button
             className="btn btn-danger"
