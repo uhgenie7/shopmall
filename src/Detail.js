@@ -1,5 +1,16 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import styled from "styled-components";
+// css를 미리 입혀놓은 컴포넌트
+
+let Div = styled.div`
+  padding: 20px;
+`;
+
+let Title = styled.h4`
+  font-size: 25px;
+  color: ${(props) => props.color};
+`;
 
 function Detail(props) {
   let history = useHistory();
@@ -10,6 +21,9 @@ function Detail(props) {
 
   return (
     <div className="container">
+      <Div>
+        <Title color={"red"}>Detail</Title>
+      </Div>
       <div className="row">
         <div className="col-md-6">
           <img
