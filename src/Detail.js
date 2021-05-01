@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 // css를 미리 입혀놓은 컴포넌트
+import "./Detail.scss";
 
 let Div = styled.div`
   padding: 20px;
@@ -23,6 +24,10 @@ function Detail(props) {
     <div className="container">
       <Div>
         <Title color={"red"}>Detail</Title>
+        <h5 className="red">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis
+          aliquid fugiat
+        </h5>
       </Div>
       <div className="row">
         <div className="col-md-6">
