@@ -29,6 +29,9 @@ function Detail(props) {
           aliquid fugiat
         </h5>
       </Div>
+      <div className="my-alert-yellow">
+        <p>재고가 얼마 남지 않았습니다.</p>
+      </div>
       <div className="row">
         <div className="col-md-6">
           <img

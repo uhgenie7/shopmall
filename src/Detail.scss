@@ -1,5 +1,64 @@
-$mainColor: #ff0000;
+// import는 다른 파일처럼 import해서 쓴다.
+@import "./reset.scss";
 
+// $이름을 쓰면 root 처럼 담아서 사용할 수 있다.
+$mainColor: #ff0000;
 .red {
   color: $mainColor;
+}
+
+// nesting 문법
+// div.container h4 {
+//   color: blue;
+// }
+
+// div.container p {
+//   color: green;
+// }
+
+div.container {
+  // nesting은 스페이스바 역할을 한다.
+  // div.container 안에 있는 ui라는 직관성이 있다.
+  h4 {
+    color: blue;
+  }
+
+  p {
+    color: green;
+  }
+}
+
+// extend 문법
+.my-alert {
+  background: #eeeeee;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+}
+
+.my-alert-yellow {
+  @extend .my-alert;
+  // .my-alert에 있는 모든 속성을 복사붙혀넣기 해주세요.
+  background: #ffe491;
+}
+
+.my-alert p {
+  margin-bottom: 0;
+}
+
+// @mixin / @include 함수 문법
+@mixin alert() {
+  background: #eeeeee;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+}
+
+.my-alert {
+  @include alert();
+  // alert에 있는 속성을 붙혀넣어줌
 }
