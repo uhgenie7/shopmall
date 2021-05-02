@@ -15,16 +15,23 @@ let Title = styled.h4`
 
 function Detail(props) {
   let history = useHistory();
+  let [i, iChange] = useState("");
   let { id } = useParams(); // {사용자가 입력한 URL }
   let shoesInfo = props.shoes.find(function (item) {
     return item.id == id;
   });
+  let [hideDiv, changeDiv] = useState(false);
+
   useEffect(() => {
-    setTimeout(() => {
+    let timer = setTimeout(() => {
       changeDiv(true);
     }, 2000);
-  });
-  let [hideDiv, changeDiv] = useState(false);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [hideDiv]);
+  // []는 특정 조건. hideDiv가 실행될 때만 실행
+
   function AlertDiv() {
     return (
       <div className="my-alert-yellow">
@@ -49,6 +56,12 @@ function Detail(props) {
             width="100%"
           />
         </div>
+        {iChange}
+        <input
+          onChange={(e) => {
+            iChange(e.target.value);
+          }}
+        />
         <div className="col-md-6 mt-4">
           <h4 className="pt-5">{shoesInfo.title}</h4>
           <p>{shoesInfo.content}</p>
