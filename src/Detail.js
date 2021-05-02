@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 // css를 미리 입혀놓은 컴포넌트
@@ -19,7 +19,19 @@ function Detail(props) {
   let shoesInfo = props.shoes.find(function (item) {
     return item.id == id;
   });
-
+  useEffect(() => {
+    setTimeout(() => {
+      changeDiv(true);
+    }, 2000);
+  });
+  let [hideDiv, changeDiv] = useState(false);
+  function AlertDiv() {
+    return (
+      <div className="my-alert-yellow">
+        <p>재고가 얼마 남지 않았습니다.</p>
+      </div>
+    );
+  }
   return (
     <div className="container">
       <Div>
@@ -29,9 +41,7 @@ function Detail(props) {
           aliquid fugiat
         </h5>
       </Div>
-      <div className="my-alert-yellow">
-        <p>재고가 얼마 남지 않았습니다.</p>
-      </div>
+      {hideDiv === false ? <AlertDiv /> : null}
       <div className="row">
         <div className="col-md-6">
           <img
