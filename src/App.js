@@ -4,6 +4,7 @@ import { Navbar, Nav, NavDropdown, Jumbotron, Button } from "react-bootstrap";
 import Data from "./data.js";
 import { Link, Route, Switch } from "react-router-dom";
 import Detail from "./Detail";
+import axios from "axios";
 
 function App() {
   let [shoes, shoesChange] = useState(Data);
@@ -50,14 +51,29 @@ function App() {
                 return <ShoesList shoes={shoes[index]} i={index} key={index} />;
               })}
             </div>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                axios
+                  .get("https://codingapple1.github.io/shop/data2.json")
+                  .then((result) => {
+                    console.log(result.data);
+                  })
+                  .catch(() => {
+                    console.log("실패했습니다");
+                  });
+              }}
+            >
+              더보기
+            </button>
           </div>
         </Route>
         <Route path="/detail/:id">
           <Detail shoes={shoes} />
         </Route>
-        <Route path="/:id">
+        {/* <Route path="/:id">
           <div>여긴 어떻게 오셨나요?</div>
-        </Route>
+        </Route> */}
       </Switch>
     </div>
   );
