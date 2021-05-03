@@ -8,7 +8,19 @@ import axios from "axios";
 
 function App() {
   let [shoes, shoesChange] = useState(Data);
+  let [load, loadingChange] = useState(false);
+  // 재고
+  let [stock, stockChange] = useState([10, 11, 12]);
 
+  function Loading() {
+    return (
+      <div>
+        <h2>제목</h2>
+        <p>날짜</p>
+        <p>상세 내용</p>
+      </div>
+    );
+  }
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
@@ -51,15 +63,19 @@ function App() {
                 return <ShoesList shoes={shoes[index]} i={index} key={index} />;
               })}
             </div>
+
             <button
               className="btn btn-primary"
               onClick={() => {
+                axios.post("서버URL", { id: "admin", pw: 1234 });
                 axios
                   .get("https://codingapple1.github.io/shop/data2.json")
                   .then((result) => {
-                    console.log(result.data);
+                    // loadingChange(!load);
+                    shoesChange([...shoes, ...result.data]);
                   })
                   .catch(() => {
+                    // loadingChange(!load);
                     console.log("실패했습니다");
                   });
               }}
@@ -69,11 +85,11 @@ function App() {
           </div>
         </Route>
         <Route path="/detail/:id">
-          <Detail shoes={shoes} />
+          <Detail shoes={shoes} stock={stock} stockChange={stockChange} />
         </Route>
-        {/* <Route path="/:id">
+        <Route path="/:id">
           <div>여긴 어떻게 오셨나요?</div>
-        </Route> */}
+        </Route>
       </Switch>
     </div>
   );
