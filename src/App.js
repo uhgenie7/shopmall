@@ -4,12 +4,15 @@ import { Navbar, Nav, Jumbotron, Button } from "react-bootstrap";
 import Data from "./data.js";
 import { Link, Route, Switch } from "react-router-dom";
 import Detail from "./Detail";
+import Software from "./component/Software";
+import Game from "./game";
 import axios from "axios";
 // props 상태관리 쉽게 하기
 let stockContext = React.createContext();
 // 같은 변수 값을 공유할 범위 생성
 function App() {
-  let [shoes, shoesChange] = useState(Data);
+  let [news, newsChange] = useState(Data);
+  let [game, gameChange] = useState(Game);
   let [load, loadingChange] = useState(false);
   // 재고
   let [stock, stockChange] = useState([10, 11, 12]);
@@ -76,9 +79,9 @@ function App() {
               <h2>NEWS & UPDATE</h2>
               <stockContext.Provider value={stock}>
                 <div className="row">
-                  {shoes.map((item, index) => {
+                  {news.map((item, index) => {
                     return (
-                      <ShoesList shoes={shoes[index]} i={index} key={index} />
+                      <NewsList news={news[index]} i={index} key={index} />
                     );
                   })}
                 </div>
@@ -86,15 +89,12 @@ function App() {
               <button
                 className="btn btn-primary"
                 onClick={() => {
-                  axios.post("서버URL", { id: "admin", pw: 1234 });
                   axios
                     .get("https://codingapple1.github.io/shop/data2.json")
                     .then((result) => {
-                      // loadingChange(!load);
-                      shoesChange([...shoes, ...result.data]);
+                      newsChange([...news, ...result.data]);
                     })
                     .catch(() => {
-                      // loadingChange(!load);
                       console.log("실패했습니다");
                     });
                 }}
@@ -106,46 +106,85 @@ function App() {
           <section>
             <div className="container">
               <h2>GAME TITLE</h2>
-              <button className="btn btn-primary">신상품</button>
-              <button className="btn btn-primary">SWITCH</button>
-              <button className="btn btn-primary">3DS</button>
+              <div className="gameTitleBtns">
+                <button className="btn btn-primary">신상품</button>
+                <button className="btn btn-primary">SWITCH</button>
+                <button className="btn btn-primary">3DS</button>
+              </div>
+              <div className="row">
+                {game.map((item, index) => {
+                  return <GameList game={game[index]} i={index} key={index} />;
+                })}
+              </div>
             </div>
+            <button className="btn btn-primary">더보기</button>
           </section>
-          <section>
-            <div className="container">배너자리</div>
-          </section>
-          <section>공지사항 자리</section>
+          <section className="notice">공지사항 자리</section>
         </Route>
         <Route path="/detail/:id">
-          <Detail shoes={shoes} stock={stock} stockChange={stockChange} />
+          <Detail news={news} stock={stock} stockChange={stockChange} />
+        </Route>
+        <Route path="/software/:id">
+          <Software game={game} />
         </Route>
         <Route path="/:id">
           <div>여긴 어떻게 오셨나요?</div>
         </Route>
       </Switch>
-      <footer>footer자리</footer>
+      <footer>
+        <div className="inner">
+          <div className="btnTerms">
+            <a href="#">이용약관</a>
+            <a href="#">개인정보취급방침</a>
+          </div>
+          <p className="f-info">고객지원 문의전화 : 1670-9900</p>
+          <address>
+            ⓒ 2006 Nintendo of Korea Co., Ltd. All Rights Reserved.
+            <br />
+            <span>상호명 : 한국닌텐도주식회사</span>
+            <span>대표자명 : 미우라 타카히로</span>
+          </address>
+        </div>
+      </footer>
     </div>
   );
 }
 
 // component
-function ShoesList(props) {
+function NewsList(props) {
   let stocks = useContext(stockContext);
-
   return (
     <div className="col-md-4">
-      <img
-        width="100%"
-        src={
-          "https://codingapple1.github.io/shop/shoes" + (props.i + 1) + ".jpg"
-        }
-        alt="상품1"
-      />
-      <h4>{props.shoes.title}</h4>
-      <p>
-        {props.shoes.content} & {props.shoes.price}
-      </p>
+      <Link to={"/detail/" + props.i}>
+        <img
+          width="100%"
+          src={
+            "https://codingapple1.github.io/shop/shoes" + (props.i + 1) + ".jpg"
+          }
+          alt={"상품" + props.i + 1}
+        />
+      </Link>
+      <h3 className="news-title">{props.news.title}</h3>
+      <p>{props.news.content}</p>
+      <p>{props.news.price}</p>
       {stocks[props.i]}
+    </div>
+  );
+}
+
+function GameList(props) {
+  return (
+    <div className="col-md-4">
+      <Link to={"/software/" + props.i}>
+        <img
+          width="100%"
+          src={"http://devuhj.com/image/soft" + (props.i + 1) + ".jpg"}
+          alt={"상품" + props.i + 1}
+        />
+      </Link>
+      <h3>{props.game.title}</h3>
+      <p>{props.game.release}</p>
+      <p>{props.game.account}</p>
     </div>
   );
 }

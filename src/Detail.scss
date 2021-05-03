@@ -2,7 +2,8 @@
 @import "./reset.scss";
 
 // $이름을 쓰면 root 처럼 담아서 사용할 수 있다.
-$mainColor: #ff0000;
+$mainColor: #e60012;
+
 .red {
   color: $mainColor;
 }
@@ -17,14 +18,22 @@ $mainColor: #ff0000;
 // }
 
 div.container {
+  margin-bottom: 30px;
   // nesting은 스페이스바 역할을 한다.
   // div.container 안에 있는 ui라는 직관성이 있다.
-  h4 {
-    color: blue;
+  h3 {
+    color: black;
+    text-align: left;
   }
 
   p {
-    color: green;
+    color: gray;
+    margin: 0;
+    text-align: left;
+  }
+
+  button {
+    margin: 1rem 0.5rem;
   }
 }
 

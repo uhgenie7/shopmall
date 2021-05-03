@@ -8,16 +8,16 @@ let Div = styled.div`
   padding: 20px;
 `;
 
-let Title = styled.h4`
+let Title = styled.h2`
+  text-align: left;
   font-size: 25px;
   color: ${(props) => props.color};
 `;
 
 function Detail(props) {
   let history = useHistory();
-  let [i, iChange] = useState("");
   let { id } = useParams(); // {사용자가 입력한 URL }
-  let shoesInfo = props.shoes.find(function (item) {
+  let newsInfo = props.news.find(function (item) {
     return item.id == id;
   });
   let [hideDiv, changeDiv] = useState(false);
@@ -42,11 +42,10 @@ function Detail(props) {
   return (
     <div className="container">
       <Div>
-        <Title color={"red"}>Detail</Title>
-        <h5 className="red">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis
-          aliquid fugiat
-        </h5>
+        <Title>NEWS & UPDATE</Title>
+        <p>{newsInfo.content}</p>
+        <p>{newsInfo.price}</p>
+        <h3 className="pt-5">{newsInfo.title}</h3>
       </Div>
       {hideDiv === false ? <AlertDiv /> : null}
       <div className="row">
@@ -56,16 +55,7 @@ function Detail(props) {
             width="100%"
           />
         </div>
-        {iChange}
-        <input
-          onChange={(e) => {
-            iChange(e.target.value);
-          }}
-        />
         <div className="col-md-6 mt-4">
-          <h4 className="pt-5">{shoesInfo.title}</h4>
-          <p>{shoesInfo.content}</p>
-          <p>{shoesInfo.price}원</p>
           <Stock stock={props.stock} />
           <button
             className="btn btn-danger"
