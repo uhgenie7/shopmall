@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
 // css를 미리 입혀놓은 컴포넌트
-import "./Detail.scss";
+import "../Detail.scss";
 
 let Div = styled.div`
   padding: 20px;
