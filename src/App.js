@@ -3,7 +3,7 @@ import "./App.css";
 import { Navbar, Nav, Jumbotron, Button } from "react-bootstrap";
 import Data from "./data.js";
 import { Link, Route, Switch } from "react-router-dom";
-import Detail from "./Detail";
+import Detail from "./component/Detail";
 import Software from "./component/Software";
 import Cart from "./component/Cart";
 import Game from "./game";

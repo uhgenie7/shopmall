@@ -44,7 +44,7 @@
   justify-content: center;
   flex-direction: column;
   height: 400px;
-  background: url(./background.png) center center;
+  background: url(./image/background.png) center center;
   color: white;
 }
 
