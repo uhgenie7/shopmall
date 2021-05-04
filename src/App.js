@@ -5,6 +5,7 @@ import Data from "./data.js";
 import { Link, Route, Switch } from "react-router-dom";
 import Detail from "./Detail";
 import Software from "./component/Software";
+import Cart from "./component/Cart";
 import Game from "./game";
 import axios from "axios";
 import { CSSTransition } from "react-transition-group";
@@ -168,6 +169,9 @@ function App() {
         </Route>
         <Route path="/software/:id">
           <Software game={game} />
+        </Route>
+        <Route path="/cart/:id">
+          <Cart />
         </Route>
         <Route path="/:id">
           <div>여긴 어떻게 오셨나요?</div>
