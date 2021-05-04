@@ -25,7 +25,10 @@ function Cart(props) {
                   <button
                     className="btn btn-danger"
                     onClick={() => {
-                      props.dispatch({ type: "증가" });
+                      props.dispatch({
+                        type: "증가",
+                        payload: { name: "kim" },
+                      });
                     }}
                   >
                     +

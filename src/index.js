@@ -11,6 +11,7 @@ let defAlert = true;
 
 function reducer2(state = defAlert, action) {
   if (action.type === "close") {
+    let payload = action.payload;
     state = false;
     return state;
   } else {
@@ -25,7 +26,11 @@ let defState = [
   { id: 3, name: "링 피트 어드벤처", quan: 5 },
 ];
 function reducer(state = defState, action) {
-  if (action.type === "증가") {
+  if (action.type === "항목추가") {
+    let copy = [...state];
+    copy.push(action.payload);
+    return copy;
+  } else if (action.type === "증가") {
     let copy = [...state];
     copy[0].quan++;
     return copy;

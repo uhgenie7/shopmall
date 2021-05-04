@@ -170,7 +170,7 @@ function App() {
         <Route path="/software/:id">
           <Software game={game} />
         </Route>
-        <Route path="/cart/:id">
+        <Route path="/cart">
           <Cart />
         </Route>
         <Route path="/:id">

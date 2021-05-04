@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import { connect } from "react-redux";
 import styled from "styled-components";
 // css를 미리 입혀놓은 컴포넌트
 import "./Detail.scss";
@@ -60,9 +61,15 @@ function Detail(props) {
           <button
             className="btn btn-danger"
             onClick={() => {
-              let propsStock = [...props.stock];
-              propsStock = propsStock[0] - 1;
-              props.stockChange(propsStock);
+              props.stockChange([9, 11, 12]);
+              // let propsStock = [...props.stock];
+              // propsStock = propsStock[0] - 1;
+              // props.stockChange(propsStock);
+              props.dispatch({
+                type: "항목추가",
+                payload: { id: 4, name: "새로운상품", quan: 1 },
+              });
+              history.push("/cart");
             }}
           >
             주문하기
@@ -93,4 +100,12 @@ function Stock(props) {
   return <div>재고: {props.stock[0]}</div>;
 }
 
-export default Detail;
+function redux(state) {
+  return {
+    state: state.reducer,
+    alertState: state.reducer2,
+  };
+}
+
+export default connect(redux)(Detail);
+// export default Detail;
