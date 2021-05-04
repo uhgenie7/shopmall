@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./App.css";
 import { Navbar, Nav, Jumbotron, Button } from "react-bootstrap";
 import Data from "./data.js";
@@ -7,6 +7,7 @@ import Detail from "./Detail";
 import Software from "./component/Software";
 import Game from "./game";
 import axios from "axios";
+import { CSSTransition } from "react-transition-group";
 // props 상태관리 쉽게 하기
 let stockContext = React.createContext();
 // 같은 변수 값을 공유할 범위 생성
@@ -18,6 +19,7 @@ function App() {
   let [stock, stockChange] = useState([10, 11, 12]);
   // 클릭 저장 상태
   let [tab, tabChange] = useState(0);
+  let [transition, transitionChange] = useState(false);
   let newGame = game.map((item, index) => {
     return <GameList game={game[index]} i={index} key={index} />;
   });
@@ -119,6 +121,7 @@ function App() {
                 <button
                   className="btn btn-primary"
                   onClick={() => {
+                    transitionChange(false);
                     tabChange(0);
                   }}
                 >
@@ -127,6 +130,7 @@ function App() {
                 <button
                   className="btn btn-primary"
                   onClick={() => {
+                    transitionChange(false);
                     tabChange(1);
                   }}
                 >
@@ -135,6 +139,7 @@ function App() {
                 <button
                   className="btn btn-primary"
                   onClick={() => {
+                    transitionChange(false);
                     tabChange(2);
                   }}
                 >
@@ -142,9 +147,16 @@ function App() {
                 </button>
               </div>
               <div className="gameTitleContainer">
-                <div className="row">
-                  <TabContent tab={tab} newGame={newGame} n3dsGame={n3dsGame} />
-                </div>
+                <CSSTransition in={transition} classNames="wow" timeout={500}>
+                  <div className="row">
+                    <TabContent
+                      tab={tab}
+                      newGame={newGame}
+                      n3dsGame={n3dsGame}
+                      transitionChange={transitionChange}
+                    />
+                  </div>
+                </CSSTransition>
               </div>
             </div>
             <button className="btn btn-primary">더보기</button>
@@ -264,6 +276,9 @@ function N3dsList(props) {
 }
 
 function TabContent(props) {
+  useEffect(() => {
+    props.transitionChange(true);
+  });
   if (props.tab === 0) {
     return props.newGame;
   } else if (props.tab === 1) {
