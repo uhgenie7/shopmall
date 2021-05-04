@@ -44,17 +44,26 @@ function Cart(props) {
           })}
         </tbody>
       </Table>
-      <div className="my-alert-yellow">
-        <p>지금 구매하시면 신규 할인!</p>
-        <button>닫기</button>
-      </div>
+      {props.alertState === true ? (
+        <div className="my-alert-yellow">
+          <p>지금 구매하시면 신규 할인!</p>
+          <button
+            onClick={() => {
+              props.dispatch({ type: "close" });
+            }}
+          >
+            닫기
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }
 
 function redux(state) {
   return {
-    state: state,
+    state: state.reducer,
+    alertState: state.reducer2,
   };
 }
 

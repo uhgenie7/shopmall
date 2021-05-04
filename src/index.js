@@ -5,9 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { combineReducers, createStore } from "redux";
 
 let defAlert = true;
+
+function reducer2(state = defAlert, action) {
+  if (action.type === "close") {
+    state = false;
+    return state;
+  } else {
+    return state;
+  }
+}
 
 let defState = [
   { id: 0, name: "미토피아", quan: 2 },
@@ -29,7 +38,7 @@ function reducer(state = defState, action) {
   }
 }
 
-let store = createStore(reducer);
+let store = createStore(combineReducers({ reducer, reducer2 }));
 
 ReactDOM.render(
   <React.StrictMode>
