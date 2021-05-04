@@ -25,6 +25,7 @@ let defState = [
   { id: 2, name: "슈퍼 마리오 3D 월드 + 퓨리 월드", quan: 10 },
   { id: 3, name: "링 피트 어드벤처", quan: 5 },
 ];
+
 function reducer(state = defState, action) {
   if (action.type === "항목추가") {
     let copy = [...state];
@@ -32,11 +33,13 @@ function reducer(state = defState, action) {
     return copy;
   } else if (action.type === "증가") {
     let copy = [...state];
-    copy[0].quan++;
+    copy[action.payload].quan++;
     return copy;
   } else if (action.type === "감소") {
     let copy = [...state];
-    copy[0].quan--;
+    if (copy[action.payload].quan > 0) {
+      copy[action.payload].quan--;
+    }
     return copy;
   } else {
     return state;
