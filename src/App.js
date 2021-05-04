@@ -16,6 +16,15 @@ function App() {
   let [load, loadingChange] = useState(false);
   // 재고
   let [stock, stockChange] = useState([10, 11, 12]);
+  // 클릭 저장 상태
+  let [tab, tabChange] = useState(0);
+  let newGame = game.map((item, index) => {
+    return <GameList game={game[index]} i={index} key={index} />;
+  });
+
+  let n3dsGame = game.map((item, index) => {
+    return <N3dsList game={game[index]} i={index} key={index} />;
+  });
 
   function Loading() {
     return (
@@ -107,14 +116,35 @@ function App() {
             <div className="container">
               <h2>GAME TITLE</h2>
               <div className="gameTitleBtns">
-                <button className="btn btn-primary">신상품</button>
-                <button className="btn btn-primary">SWITCH</button>
-                <button className="btn btn-primary">3DS</button>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => {
+                    tabChange(0);
+                  }}
+                >
+                  신상품
+                </button>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => {
+                    tabChange(1);
+                  }}
+                >
+                  SWITCH
+                </button>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => {
+                    tabChange(2);
+                  }}
+                >
+                  3DS
+                </button>
               </div>
-              <div className="row">
-                {game.map((item, index) => {
-                  return <GameList game={game[index]} i={index} key={index} />;
-                })}
+              <div className="gameTitleContainer">
+                <div className="row">
+                  <TabContent tab={tab} newGame={newGame} n3dsGame={n3dsGame} />
+                </div>
               </div>
             </div>
             <button className="btn btn-primary">더보기</button>
@@ -178,7 +208,11 @@ function GameList(props) {
       <Link to={"/software/" + props.i}>
         <img
           width="100%"
-          src={"http://devuhj.com/image/soft" + (props.i + 1) + ".jpg"}
+          src={
+            "http://devuhj.com/nintendo/image/soft/soft" +
+            (props.i + 1) +
+            ".jpg"
+          }
           alt={"상품" + props.i + 1}
         />
       </Link>
@@ -187,6 +221,56 @@ function GameList(props) {
       <p>{props.game.account}</p>
     </div>
   );
+}
+
+function SwitchList(props) {
+  return (
+    <div className="col-md-4">
+      <Link to={"/software/" + props.i}>
+        <img
+          width="100%"
+          src={
+            "http://devuhj.com/nintendo/image/soft/soft" +
+            (props.i + 1) +
+            ".jpg"
+          }
+          alt={"상품" + props.i + 1}
+        />
+      </Link>
+      <h3>{props.game.title}</h3>
+      <p>{props.game.release}</p>
+      <p>{props.game.account}</p>
+    </div>
+  );
+}
+
+function N3dsList(props) {
+  return (
+    <div className="col-md-4">
+      <Link to={"/software/" + props.i}>
+        <img
+          width="100%"
+          src={
+            "http://devuhj.com/nintendo/image/3ds/3ds" + (props.i + 1) + ".jpg"
+          }
+          alt={"상품" + props.i + 1}
+        />
+      </Link>
+      <h3>{props.game.title}</h3>
+      <p>{props.game.release}</p>
+      <p>{props.game.account}</p>
+    </div>
+  );
+}
+
+function TabContent(props) {
+  if (props.tab === 0) {
+    return props.newGame;
+  } else if (props.tab === 1) {
+    return props.newGame;
+  } else if (props.tab === 2) {
+    return props.n3dsGame;
+  }
 }
 
 export default App;
