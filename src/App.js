@@ -168,7 +168,7 @@ function App() {
           <Detail news={news} stock={stock} stockChange={stockChange} />
         </Route>
         <Route path="/software/:id">
-          <Software game={game} />
+          <Software game={game} stock={stock} stockChange={stockChange} />
         </Route>
         <Route path="/cart">
           <Cart />
