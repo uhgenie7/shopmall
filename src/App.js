@@ -201,13 +201,15 @@ function NewsList(props) {
   let stocks = useContext(stockContext);
   return (
     <div className="col-md-4">
-      <Link to={"/detail/" + props.i}>
+      <Link to={"/detail/" + props.news.id}>
         <img
           width="100%"
           src={
-            "https://codingapple1.github.io/shop/shoes" + (props.i + 1) + ".jpg"
+            "https://codingapple1.github.io/shop/shoes" +
+            (props.news.id + 1) +
+            ".jpg"
           }
-          alt={"상품" + props.i + 1}
+          alt={"상품" + props.news.id + 1}
         />
       </Link>
       <h3 className="news-title">{props.news.title}</h3>
@@ -221,7 +223,7 @@ function NewsList(props) {
 function GameList(props) {
   return (
     <div className="col-md-4">
-      <Link to={"/software/" + props.i}>
+      <Link to={"/software/" + props.game.id}>
         <img
           width="100%"
           src={
@@ -242,7 +244,7 @@ function GameList(props) {
 function SwitchList(props) {
   return (
     <div className="col-md-4">
-      <Link to={"/software/" + props.i}>
+      <Link to={"/software/" + props.game.id}>
         <img
           width="100%"
           src={
@@ -263,7 +265,7 @@ function SwitchList(props) {
 function N3dsList(props) {
   return (
     <div className="col-md-4">
-      <Link to={"/software/" + props.i}>
+      <Link to={"/software/" + props.game.id}>
         <img
           width="100%"
           src={

@@ -28,9 +28,18 @@ let defState = [
 
 function reducer(state = defState, action) {
   if (action.type === "항목추가") {
-    let copy = [...state];
-    copy.push(action.payload);
-    return copy;
+    let found = state.findIndex((item) => {
+      return item.id === action.payload.id;
+    });
+    if (found >= 0) {
+      let copy = [...state];
+      copy[found].quan++;
+      return copy;
+    } else {
+      let copy = [...state];
+      copy.push(action.payload);
+      return copy;
+    }
   } else if (action.type === "증가") {
     let copy = [...state];
     copy[action.payload].quan++;
